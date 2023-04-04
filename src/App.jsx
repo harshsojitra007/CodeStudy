@@ -30,33 +30,35 @@ function App() {
       <BrowserRouter>
         <Sidebar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/CodeStudy">
+            <Route index element={<HomePage />} />
 
-          {!user && <Route path="/signup" element={<Signup />} />}
-          {user && <Route path="/signup" element={<HomePage />} />}
+            {!user && <Route path="/signup" element={<Signup />} />}
+            {user && <Route path="/signup" element={<HomePage />} />}
 
-          {!user && <Route path="/login" element={<Login />} />}
-          {user && <Route path="/login" element={<HomePage />} />}
+            {!user && <Route path="/login" element={<Login />} />}
+            {user && <Route path="/login" element={<HomePage />} />}
 
-          {!user && <Route path="/create/file" element={<Login />} />}
-          {user && <Route path="/create/file" element={<CreatePost />} />}
+            {!user && <Route path="/create/file" element={<Login />} />}
+            {user && <Route path="/create/file" element={<CreatePost />} />}
 
-          {user && <Route path="/account" element={<DisplayProfile />} />}
-          {!user && <Route path="/account" element={<Login />} />}
+            {user && <Route path="/account" element={<DisplayProfile />} />}
+            {!user && <Route path="/account" element={<Login />} />}
 
-          {user && <Route path="/starred" element={<DisplayFavourites />} />}
-          {!user && <Route path="/account" element={<Login />} />}
+            {user && <Route path="/starred" element={<DisplayFavourites />} />}
+            {!user && <Route path="/account" element={<Login />} />}
 
-          {user && <Route path="/edit/profile" element={<EditProfile />} />}
-          {!user && <Route path="/edit/profile" element={<Login />} />}
+            {user && <Route path="/edit/profile" element={<EditProfile />} />}
+            {!user && <Route path="/edit/profile" element={<Login />} />}
 
-          <Route path="/discuss" element={<Discuss />} />
-          <Route path="/doubt" element={<DisplayDoubt />} />
+            <Route path="/discuss" element={<Discuss />} />
+            <Route path="/doubt" element={<DisplayDoubt />} />
 
-          <Route path="/forgot" element={<ForgotPassword />} />
-          <Route path="/new/password" element={<ResetPassword />} />
+            <Route path="/forgot" element={<ForgotPassword />} />
+            <Route path="/new/password" element={<ResetPassword />} />
 
-          <Route path="/response" element={<Response />} />
+            <Route path="/response" element={<Response />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AppContext.Provider>
