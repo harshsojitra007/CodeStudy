@@ -24,6 +24,7 @@ import {
 } from "@mui/material";
 
 import { enqueueSnackbar, SnackbarProvider } from "notistack";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
   const user = useSelector((state) => state?.user?.data);
@@ -44,6 +45,8 @@ const EditProfile = () => {
   const [disableSubmit, setDisableSubmit] = useState(false);
 
   const [updateProfileFunction] = useUpdateUserProfileMutation();
+
+  const navigate = useNavigate();
 
   const handleUpdate = async () => {
     if (displayName === "") {
@@ -123,8 +126,8 @@ const EditProfile = () => {
       technicalSkills: skills,
       photo: urlData,
       headers: {
-        authorization: "Bearer " + userToken
-      }
+        authorization: "Bearer " + userToken,
+      },
     }).then(async ({ data, error }) => {
       if (data)
         enqueueSnackbar("Profile updated successfully!", {
@@ -357,9 +360,7 @@ const EditProfile = () => {
             </div>
             <Button
               disabled={disableSubmit}
-              onClick={() =>
-                (window.location.href = `/account?user=${user?.name}`)
-              }
+              onClick={() => navigate(`/account?user=${user?.name}`)}
               color="info"
               className="custom-input-field update_profile_action_btn"
             >

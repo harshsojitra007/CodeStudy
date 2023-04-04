@@ -1,4 +1,10 @@
-import { Alert, Backdrop, Button, CircularProgress, TextField } from "@mui/material";
+import {
+  Alert,
+  Backdrop,
+  Button,
+  CircularProgress,
+  TextField,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useResetPasswordMutation } from "../services/appApi";
@@ -29,18 +35,13 @@ const ResetPassword = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setDisableSubmit(true);
-    if (password === "" ||
-      confirmPassword === "") {
+    if (password === "" || confirmPassword === "") {
       setIsError(true);
       setAlertMessage("Field can not be empty!!");
       setResponse(true);
       setDisableSubmit(false);
       return;
-    }
-    else if (
-      password.length < 8 ||
-      confirmPassword.length < 8
-    ) {
+    } else if (password.length < 8 || confirmPassword.length < 8) {
       setIsError(true);
       setAlertMessage("Password is too weak!!");
       setResponse(true);
@@ -65,7 +66,7 @@ const ResetPassword = () => {
           setAlertMessage(data);
           setResponse(true);
           setDisableSubmit(false);
-          setTimeout(() => window.location.href = "/login", 1500);
+          setTimeout(() => navigate("/login"), 1500);
         }
       }
     );
@@ -98,9 +99,7 @@ const ResetPassword = () => {
           {/* <div className="company-title">
             <img id="company-logo" src={google} alt="GoogleLogo" />
           </div> */}
-          <div className="company-title">
-            CodeStudy
-          </div>
+          <div className="company-title">CodeStudy</div>
           <div className="reset-info-paragraph">
             We recommend to type in strong password of minimum length 8 with
             lower case, upper case and some special characters to keep your
@@ -143,13 +142,11 @@ const ResetPassword = () => {
                 cancel
               </Button>
               <Button disabled={disableSubmit} onClick={handleResetPassword}>
-                {
-                  disableSubmit ? (
-                    <CircularProgress style={{ width: "20px", height: "20px" }} />
-                  ) : (
-                    "Reset Password"
-                  )
-                }
+                {disableSubmit ? (
+                  <CircularProgress style={{ width: "20px", height: "20px" }} />
+                ) : (
+                  "Reset Password"
+                )}
               </Button>
             </div>
           </div>

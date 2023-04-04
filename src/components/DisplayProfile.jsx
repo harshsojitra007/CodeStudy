@@ -162,7 +162,7 @@ const DisplayProfile = () => {
                 style={{
                   display: queriedUser?.name === user?.name ? "flex" : "none",
                 }}
-                onClick={() => (window.location.href = `/edit/profile`)}
+                onClick={() => navigate(`/edit/profile`)}
                 className="custom_btn active edit-profile-btn"
                 variant="text"
                 color="info"

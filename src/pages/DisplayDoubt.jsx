@@ -131,7 +131,7 @@ const DisplayDoubt = () => {
                                 variant: "info",
                                 autoHideDuration: 3000,
                               });
-                              setTimeout(() => window.location.href = "/discuss", 3000);
+                              setTimeout(() => navigate("/discuss"), 3000);
                             }
                             else{
                               enqueueSnackbar(error.data, {

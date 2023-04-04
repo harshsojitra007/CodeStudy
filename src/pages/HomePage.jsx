@@ -47,6 +47,7 @@ import {
   useAddPostToFavouritesMutation,
   useAddVoteMutation,
 } from "../services/appApi";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -112,6 +113,8 @@ const HomePage = () => {
   const [fetchAllPostsFunction] = useFetchAllPostsMutation();
   const [addPostToFavouriteFunction] = useAddPostToFavouritesMutation();
   const [voteFunction] = useAddVoteMutation();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -183,7 +186,18 @@ const HomePage = () => {
 
   return (
     <div className="home-page-outer">
-      {loading && <CircularProgress style={{ width: 40, height: 40, position: "absolute", top: "50%", left: "50%", color: "#1772cd" }} />}
+      {loading && (
+        <CircularProgress
+          style={{
+            width: 40,
+            height: 40,
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            color: "#1772cd",
+          }}
+        />
+      )}
       <Backdrop
         className="backdrop-dialog"
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -326,7 +340,7 @@ const HomePage = () => {
                         }}
                         id="post-owner-img"
                         onClick={() =>
-                          (window.location.href = `/account?user=${ownerInfo?.name}`)
+                          navigate(`/account?user=${ownerInfo?.name}`)
                         }
                         src={ownerInfo.photo}
                         alt={`${ownerInfo.name}'s profile`}

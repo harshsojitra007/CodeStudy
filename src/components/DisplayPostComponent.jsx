@@ -18,6 +18,7 @@ import JoditEditor from "jodit-react";
 import { enqueueSnackbar, SnackbarProvider } from "notistack";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import {
   useFetchTagsMutation,
@@ -67,6 +68,8 @@ const DisplayPostComponent = ({ existingDoubt }) => {
 
   const [fetchTagsFunction] = useFetchTagsMutation();
   const [createDoubtFunction] = useCreateDoubtMutation();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTagsFunction().then(({ data, error }) => {
@@ -140,7 +143,7 @@ const DisplayPostComponent = ({ existingDoubt }) => {
         enqueueSnackbar(`Doubt ${!existingDoubt ? "posted" : "updated"} successfully!`, {
           autoHideDuration: 3000,
         });
-        window.location.href = "/discuss";
+        navigate("/discuss");
       } else {
         enqueueSnackbar(error.data.message, {
           variant: "error",
@@ -207,9 +210,7 @@ const DisplayPostComponent = ({ existingDoubt }) => {
               />
               <div className="btn-group">
                 <Button
-                  onClick={() => {
-                    window.location.href = "/discuss";
-                  }}
+                  onClick={() => navigate("/discuss")}
                   className="custom_btn"
                 >
                   Close
