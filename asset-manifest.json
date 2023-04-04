@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/codestudy/static/css/main.2441ff40.css",
-    "main.js": "/codestudy/static/js/main.221b8be2.js",
-    "static/js/787.c4e7f8f9.chunk.js": "/codestudy/static/js/787.c4e7f8f9.chunk.js",
-    "index.html": "/codestudy/index.html",
-    "main.2441ff40.css.map": "/codestudy/static/css/main.2441ff40.css.map",
-    "main.221b8be2.js.map": "/codestudy/static/js/main.221b8be2.js.map",
-    "787.c4e7f8f9.chunk.js.map": "/codestudy/static/js/787.c4e7f8f9.chunk.js.map"
+    "main.css": "/CodeStudy/static/css/main.2441ff40.css",
+    "main.js": "/CodeStudy/static/js/main.87cf28b7.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/CodeStudy/static/js/787.c4e7f8f9.chunk.js",
+    "index.html": "/CodeStudy/index.html",
+    "main.2441ff40.css.map": "/CodeStudy/static/css/main.2441ff40.css.map",
+    "main.87cf28b7.js.map": "/CodeStudy/static/js/main.87cf28b7.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/CodeStudy/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2441ff40.css",
-    "static/js/main.221b8be2.js"
+    "static/js/main.87cf28b7.js"
   ]
 }
