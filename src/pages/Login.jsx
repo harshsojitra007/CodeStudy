@@ -45,7 +45,7 @@ const Login = () => {
         setDisableSubmit(false);
       } else {
         localStorage.setItem("token", data.token);
-        navigate('/')
+        navigate('/CodeStudy/')
       }
     });
   };
@@ -117,7 +117,7 @@ const Login = () => {
             </div>
 
             <div className="button-group">
-              <Button onClick={() => navigate("/signup")} variant="text">
+              <Button onClick={() => navigate("/CodeStudy/signup")} variant="text">
                 Sign up
               </Button>
               <Button

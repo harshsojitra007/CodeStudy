@@ -143,7 +143,7 @@ const DisplayPostComponent = ({ existingDoubt }) => {
         enqueueSnackbar(`Doubt ${!existingDoubt ? "posted" : "updated"} successfully!`, {
           autoHideDuration: 3000,
         });
-        navigate("/discuss");
+        navigate("/CodeStudy/discuss");
       } else {
         enqueueSnackbar(error.data.message, {
           variant: "error",
@@ -210,7 +210,7 @@ const DisplayPostComponent = ({ existingDoubt }) => {
               />
               <div className="btn-group">
                 <Button
-                  onClick={() => navigate("/discuss")}
+                  onClick={() => navigate("/CodeStudy/discuss")}
                   className="custom_btn"
                 >
                   Close

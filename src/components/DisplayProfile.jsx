@@ -162,7 +162,7 @@ const DisplayProfile = () => {
                 style={{
                   display: queriedUser?.name === user?.name ? "flex" : "none",
                 }}
-                onClick={() => navigate(`/edit/profile`)}
+                onClick={() => navigate(`/CodeStudy/edit/profile`)}
                 className="custom_btn active edit-profile-btn"
                 variant="text"
                 color="info"
@@ -234,7 +234,7 @@ const DisplayProfile = () => {
               </div>
               <div className="navigation_link">
                 <Button
-                  onClick={() => navigate("/discuss")}
+                  onClick={() => navigate("/CodeStudy/discuss")}
                   className="custom_btn"
                   endIcon={<SendRoundedIcon />}
                 >
@@ -296,7 +296,7 @@ const DisplayProfile = () => {
                       className="options_outer"
                       onClick={() =>
                         navigate(
-                          `/doubt?id=${element?._id}&src=${window.location.pathname}`
+                          `/CodeStudy/doubt?id=${element?._id}&src=${window.location.pathname}`
                         )
                       }
                       key={idx}

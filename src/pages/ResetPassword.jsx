@@ -66,7 +66,7 @@ const ResetPassword = () => {
           setAlertMessage(data);
           setResponse(true);
           setDisableSubmit(false);
-          setTimeout(() => navigate("/login"), 1500);
+          setTimeout(() => navigate("/CodeStudy/login"), 1500);
         }
       }
     );
@@ -136,7 +136,7 @@ const ResetPassword = () => {
             <div className="button-group">
               <Button
                 onClick={() => {
-                  navigate("/login");
+                  navigate("/CodeStudy/login");
                 }}
               >
                 cancel

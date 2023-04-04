@@ -125,7 +125,7 @@ export default function Sidebar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography onClick={() => navigate("/")} style={{ cursor: "pointer"}} variant="h6" noWrap component="div">
+          <Typography onClick={() => navigate("/CodeStudy/")} style={{ cursor: "pointer"}} variant="h6" noWrap component="div">
             CodeStudy
           </Typography>
         </Toolbar>
@@ -140,7 +140,7 @@ export default function Sidebar() {
         <List>
           <ListItem disablePadding sx={{ display: "block" }}>
             <ListItemButton
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/CodeStudy/")}
               className="customized_blue font_verdana"
               onMouseEnter={handleOpenEvent}
               sx={{
@@ -164,7 +164,7 @@ export default function Sidebar() {
           {user && (
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
-                onClick={() => navigate("/create/file")}
+                onClick={() => navigate("/CodeStudy/create/file")}
                 className="customized_blue font_verdana"
                 onMouseEnter={handleOpenEvent}
                 sx={{
@@ -192,7 +192,7 @@ export default function Sidebar() {
 
           <ListItem disablePadding sx={{ display: "block" }}>
             <ListItemButton
-              onClick={() => navigate("/discuss")}
+              onClick={() => navigate("/CodeStudy/discuss")}
               className="customized_blue font_verdana"
               onMouseEnter={handleOpenEvent}
               sx={{
@@ -220,7 +220,7 @@ export default function Sidebar() {
           {!user && (
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/CodeStudy/login")}
                 className="customized_blue font_verdana"
                 onMouseEnter={handleOpenEvent}
                 sx={{
@@ -248,7 +248,7 @@ export default function Sidebar() {
           {!user && (
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
-                onClick={() => navigate("/signup")}
+                onClick={() => navigate("/CodeStudy/signup")}
                 className="customized_blue font_verdana"
                 onMouseEnter={handleOpenEvent}
                 sx={{
@@ -276,7 +276,7 @@ export default function Sidebar() {
           {user && (
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
-                onClick={() => navigate(`/account?user=${user.name}`)}
+                onClick={() => navigate(`/CodeStudy/account?user=${user.name}`)}
                 className="customized_blue font_verdana"
                 onMouseEnter={handleOpenEvent}
                 sx={{
@@ -304,7 +304,7 @@ export default function Sidebar() {
           {user && (
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
-                onClick={() => navigate("/starred")}
+                onClick={() => navigate("/CodeStudy/starred")}
                 className="customized_blue font_verdana"
                 onMouseEnter={handleOpenEvent}
                 sx={{
@@ -338,7 +338,7 @@ export default function Sidebar() {
                       authorization: "Bearer " + userToken
                     }
                   });
-                  navigate("/login");
+                  navigate("/CodeStudy/login");
                 }}
                 className="customized_blue font_verdana"
                 onMouseEnter={handleOpenEvent}

@@ -135,7 +135,7 @@ const Signup = () => {
             </div>
 
             <div className="button-group">
-              <Button onClick={() => navigate("/login")} variant="text">
+              <Button onClick={() => navigate("/CodeStudy/login")} variant="text">
                 Sign in
               </Button>
               <Button

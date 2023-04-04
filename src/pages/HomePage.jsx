@@ -340,7 +340,7 @@ const HomePage = () => {
                         }}
                         id="post-owner-img"
                         onClick={() =>
-                          navigate(`/account?user=${ownerInfo?.name}`)
+                          navigate(`/CodeStudy/account?user=${ownerInfo?.name}`)
                         }
                         src={ownerInfo.photo}
                         alt={`${ownerInfo.name}'s profile`}

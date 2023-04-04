@@ -360,7 +360,7 @@ const EditProfile = () => {
             </div>
             <Button
               disabled={disableSubmit}
-              onClick={() => navigate(`/account?user=${user?.name}`)}
+              onClick={() => navigate(`/CodeStudy/account?user=${user?.name}`)}
               color="info"
               className="custom-input-field update_profile_action_btn"
             >

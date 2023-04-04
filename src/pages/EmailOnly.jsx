@@ -96,7 +96,7 @@ const EmailOnly = () => {
           <div className="button-group">
             <Button
               onClick={() => {
-                navigate("/login");
+                navigate("/CodeStudy/login");
               }}
             >
               Back to login

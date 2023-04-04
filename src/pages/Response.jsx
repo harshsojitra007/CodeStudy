@@ -16,7 +16,7 @@ const Response = (props) => {
     if (searchParams.get("navigate")) {
       setIsNavigate(searchParams.get("navigate"));
       setTimeout(() => {
-        navigate("/login");
+        navigate("/CodeStudy/login");
       }, 3000);
     }
     if (searchParams.get("error")) setIsError(searchParams.get("error") === "true");

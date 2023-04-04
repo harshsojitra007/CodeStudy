@@ -94,7 +94,7 @@ const DisplayDoubt = () => {
             <div className="section_i_wrapper">
               <div className="left_hand_side">
                 <Button
-                  onClick={() => navigate(`/discuss`)}
+                  onClick={() => navigate(`/CodeStudy/discuss`)}
                   size="small"
                   startIcon={<ArrowBackIosNewRoundedIcon />}
                   className="custom_btn active black_dull"
@@ -131,7 +131,7 @@ const DisplayDoubt = () => {
                                 variant: "info",
                                 autoHideDuration: 3000,
                               });
-                              setTimeout(() => navigate("/discuss"), 3000);
+                              setTimeout(() => navigate("/CodeStudy/discuss"), 3000);
                             }
                             else{
                               enqueueSnackbar(error.data, {
@@ -234,7 +234,7 @@ const DisplayDoubt = () => {
                       <div
                         onClick={() =>
                           navigate(
-                            `/account?user=${requestedDoubt?.ownerInfo?.name}`
+                            `/CodeStudy/account?user=${requestedDoubt?.ownerInfo?.name}`
                           )
                         }
                         className="doubt_owner_name"
@@ -453,7 +453,7 @@ const DisplayDoubt = () => {
                             <div
                               onClick={() =>
                                 navigate(
-                                  `/account?user=${reply?.ownerInfo?.name}`
+                                  `/CodeStudy/account?user=${reply?.ownerInfo?.name}`
                                 )
                               }
                               className="doubt_owner_name"

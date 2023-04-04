@@ -206,7 +206,7 @@ const Discuss = () => {
                           <div className="doubt-title-and-tags-info">
                             <div
                               onClick={() =>
-                                navigate(`/doubt?id=${doubtDetails._id}`)
+                                navigate(`/CodeStudy/doubt?id=${doubtDetails._id}`)
                               }
                               className="doubt-title"
                             >

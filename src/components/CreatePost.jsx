@@ -111,7 +111,7 @@ const CreatePost = () => {
           setSubmitted(false);
 
           setTimeout(() => {
-            navigate('/');
+            navigate('/CodeStudy');
           }, 1500);
         }
       });
