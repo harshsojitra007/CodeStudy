@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import JoditEditor from "jodit-react";
 import { enqueueSnackbar, SnackbarProvider } from "notistack";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -25,6 +25,7 @@ import {
   useCreateDoubtMutation,
 } from "../services/appApi";
 import { BootstrapTooltip } from "./Navbar";
+import { AppContext } from "../context/AppContext";
 
 const DisplayPostComponent = ({ existingDoubt }) => {
   const userToken = useSelector((state) => state?.user?.token);
@@ -70,6 +71,7 @@ const DisplayPostComponent = ({ existingDoubt }) => {
   const [createDoubtFunction] = useCreateDoubtMutation();
 
   const navigate = useNavigate();
+  const { setOpenPostDialog } = useContext(AppContext);
 
   useEffect(() => {
     fetchTagsFunction().then(({ data, error }) => {
@@ -210,7 +212,7 @@ const DisplayPostComponent = ({ existingDoubt }) => {
               />
               <div className="btn-group">
                 <Button
-                  onClick={() => navigate("/CodeStudy/discuss")}
+                  onClick={() => setOpenPostDialog(false)}
                   className="custom_btn"
                 >
                   Close

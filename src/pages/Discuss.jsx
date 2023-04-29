@@ -5,7 +5,7 @@ import {
   IconButton,
   InputLabel,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   useFetchAllDoubtsMutation,
   useFetchTagsMutation,
@@ -26,6 +26,7 @@ import { enqueueSnackbar, SnackbarProvider } from "notistack";
 import { useNavigate } from "react-router-dom";
 import VisibilityRounded from "@mui/icons-material/VisibilityRounded";
 import DisplayPostComponent from "../components/DisplayPostComponent";
+import { AppContext } from "../context/AppContext";
 // import parse from "html-react-parser";
 
 const Search = styled("div")(({ theme }) => ({
@@ -58,7 +59,7 @@ const Discuss = () => {
   const [searchField, setSearchField] = useState("");
 
   const [criteria, setCriteria] = useState("newest_to_oldest");
-  const [openPostDialog, setOpenPostDialog] = useState(false);
+  const { openPostDialog, setOpenPostDialog } = useContext(AppContext);
 
   const [tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);

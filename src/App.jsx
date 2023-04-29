@@ -23,10 +23,10 @@ import DisplayDoubt from "./pages/DisplayDoubt";
 
 function App() {
   const user = useSelector((state) => state?.user);
-  const [status, setStatus] = useState(false);
+  const [openPostDialog, setOpenPostDialog] = useState(false);
 
   return (
-    <AppContext.Provider value={{ user, status, setStatus }}>
+    <AppContext.Provider value={{ user, openPostDialog, setOpenPostDialog }}>
       <BrowserRouter>
         <Sidebar />
         <Routes>
