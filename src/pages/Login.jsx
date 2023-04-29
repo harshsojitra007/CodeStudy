@@ -113,7 +113,7 @@ const Login = () => {
             </div>
 
             <div className="forgot-password-outer">
-              <a href="/forgot?index=password">Forgot password?</a>
+              <a href="/CodeStudy/forgot?index=password">Forgot password?</a>
             </div>
 
             <div className="button-group">
