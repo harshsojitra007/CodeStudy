@@ -113,7 +113,7 @@ const Login = () => {
             </div>
 
             <div className="forgot-password-outer">
-              <a href="/CodeStudy/forgot?index=password">Forgot password?</a>
+              <Button onClick={() => navigate("/CodeStudy/forgot?index=password")}>Forgot password?</Button>
             </div>
 
             <div className="button-group">

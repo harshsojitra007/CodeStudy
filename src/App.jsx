@@ -54,7 +54,7 @@ function App() {
             <Route path="discuss" element={<Discuss />} />
             <Route path="doubt" element={<DisplayDoubt />} />
 
-            <Route path="forgot?index=password" element={<ForgotPassword />} />
+            <Route path="forgot" element={<ForgotPassword />} />
             <Route path="new/password" element={<ResetPassword />} />
 
             <Route path="response" element={<Response />} />
