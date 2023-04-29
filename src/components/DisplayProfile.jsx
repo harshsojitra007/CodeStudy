@@ -1,4 +1,11 @@
-import { Alert, Button, Chip, CircularProgress, Link, Snackbar } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Chip,
+  CircularProgress,
+  Link,
+  Snackbar,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
@@ -89,7 +96,18 @@ const DisplayProfile = () => {
 
   return (
     <>
-    {loading && <CircularProgress style={{ width: 40, height: 40, position: "absolute", top: "50%", left: "50%", color: "#1772cd" }} />}
+      {loading && (
+        <CircularProgress
+          style={{
+            width: 40,
+            height: 40,
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            color: "#1772cd",
+          }}
+        />
+      )}
       <Snackbar
         onClose={() => setResponse(false)}
         autoHideDuration={2000}
@@ -291,81 +309,86 @@ const DisplayProfile = () => {
                 </div>
               ) : options === "recent_doubts" ? (
                 <div className="lower_insider">
-                  {!!optionsResult && optionsResult?.map((element, idx) => (
-                    <div
-                      className="options_outer"
-                      onClick={() =>
-                        navigate(
-                          `/CodeStudy/doubt?id=${element?._id}&src=${window.location.pathname}`
-                        )
-                      }
-                      key={idx}
-                    >
-                      <div className="post_title">{element?.doubtTitle}</div>
+                  {!!optionsResult &&
+                    optionsResult?.map((element, idx) => (
+                      <div
+                        className="options_outer"
+                        onClick={() =>
+                          navigate(
+                            `/CodeStudy/doubt?id=${element?._id}&src=${window.location.pathname}`
+                          )
+                        }
+                        key={idx}
+                      >
+                        <div className="post_title">{element?.doubtTitle}</div>
 
-                      <div className="doubt_statistics">
-                        <Button
-                          disabled
-                          startIcon={<VisibilityRounded />}
-                          className="doubt_views black"
-                        >{`${!element?.views ? 0 : element?.views} views`}</Button>
-                        {Math.floor(
-                          Math.abs(Date.now() - Date.parse(element.createdAt)) /
-                            (1000 * 60)
-                        ) < 60 ? (
-                          <div className="posted_time">{`${Math.floor(
+                        <div className="doubt_statistics">
+                          <Button
+                            disabled
+                            startIcon={<VisibilityRounded />}
+                            className="doubt_views black"
+                          >{`${
+                            !element?.views ? 0 : element?.views
+                          } views`}</Button>
+                          {Math.floor(
                             Math.abs(
                               Date.now() - Date.parse(element.createdAt)
                             ) /
                               (1000 * 60)
-                          )} minutes ago`}</div>
-                        ) : Math.floor(
-                            Math.abs(
-                              Date.now() - Date.parse(element.createdAt)
-                            ) /
-                              (1000 * 60 * 60)
-                          ) < 24 ? (
-                          <div className="posted_time">{`${Math.floor(
-                            Math.abs(
-                              Date.now() - Date.parse(element.createdAt)
-                            ) /
-                              (1000 * 60 * 60)
-                          )} Hours ago`}</div>
-                        ) : Math.floor(
-                            Math.abs(
-                              Date.now() - Date.parse(element.createdAt)
-                            ) /
-                              (1000 * 60 * 60 * 24)
-                          ) < 30 ? (
-                          <div className="posted_time">{`${Math.floor(
-                            Math.abs(
-                              Date.now() - Date.parse(element.createdAt)
-                            ) /
-                              (1000 * 60 * 60 * 24)
-                          )} Days ago`}</div>
-                        ) : Math.floor(
-                            Math.abs(
-                              Date.now() - Date.parse(element.createdAt)
-                            ) /
-                              (1000 * 60 * 60 * 24 * 30)
-                          ) < 12 ? (
-                          <div className="posted_time">{`${Math.floor(
-                            Math.abs(
-                              Date.now() - Date.parse(element.createdAt)
-                            ) /
-                              (1000 * 60 * 60 * 24 * 30)
-                          )} Months ago`}</div>
-                        ) : (
-                          <div className="posted_time">{`${Math.floor(
-                            Math.abs(
-                              Date.now() - Date.parse(element.createdAt)
-                            ) /
-                              (1000 * 60 * 60 * 24 * 30 * 12)
-                          )} Years ago`}</div>
-                        )}
+                          ) < 60 ? (
+                            <div className="posted_time">{`${Math.floor(
+                              Math.abs(
+                                Date.now() - Date.parse(element.createdAt)
+                              ) /
+                                (1000 * 60)
+                            )} minutes ago`}</div>
+                          ) : Math.floor(
+                              Math.abs(
+                                Date.now() - Date.parse(element.createdAt)
+                              ) /
+                                (1000 * 60 * 60)
+                            ) < 24 ? (
+                            <div className="posted_time">{`${Math.floor(
+                              Math.abs(
+                                Date.now() - Date.parse(element.createdAt)
+                              ) /
+                                (1000 * 60 * 60)
+                            )} Hours ago`}</div>
+                          ) : Math.floor(
+                              Math.abs(
+                                Date.now() - Date.parse(element.createdAt)
+                              ) /
+                                (1000 * 60 * 60 * 24)
+                            ) < 30 ? (
+                            <div className="posted_time">{`${Math.floor(
+                              Math.abs(
+                                Date.now() - Date.parse(element.createdAt)
+                              ) /
+                                (1000 * 60 * 60 * 24)
+                            )} Days ago`}</div>
+                          ) : Math.floor(
+                              Math.abs(
+                                Date.now() - Date.parse(element.createdAt)
+                              ) /
+                                (1000 * 60 * 60 * 24 * 30)
+                            ) < 12 ? (
+                            <div className="posted_time">{`${Math.floor(
+                              Math.abs(
+                                Date.now() - Date.parse(element.createdAt)
+                              ) /
+                                (1000 * 60 * 60 * 24 * 30)
+                            )} Months ago`}</div>
+                          ) : (
+                            <div className="posted_time">{`${Math.floor(
+                              Math.abs(
+                                Date.now() - Date.parse(element.createdAt)
+                              ) /
+                                (1000 * 60 * 60 * 24 * 30 * 12)
+                            )} Years ago`}</div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               ) : (
                 ""

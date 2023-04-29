@@ -145,7 +145,7 @@ const DisplayFavourites = () => {
   }, [fetchFavoritePostsFunction, fetchTagsFunction, user, userToken]);
 
   useEffect(() => {
-    setIsLoading(true);
+    // setIsLoading(true);
     setPosts([]);
 
     if (selectedTags !== [])
@@ -186,7 +186,7 @@ const DisplayFavourites = () => {
         setPosts((state) => state);
         break;
     }
-    setIsLoading(false);
+    // setIsLoading(false);
   }, [selectedTags, allPostsData, searchField, sortCriteria]);
   return (
     <div className="display-favourites-page-outer">

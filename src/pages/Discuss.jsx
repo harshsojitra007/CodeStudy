@@ -2,6 +2,7 @@ import {
   Avatar,
   Button,
   Chip,
+  CircularProgress,
   IconButton,
   InputLabel,
 } from "@mui/material";
@@ -63,6 +64,7 @@ const Discuss = () => {
 
   const [tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [loading, setIsLoading] = useState(false);
 
   const [fetchAllDoubtsFunction] = useFetchAllDoubtsMutation();
   const [fetchTagsFunction] = useFetchTagsMutation();
@@ -70,6 +72,7 @@ const Discuss = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setIsLoading(true);
     fetchAllDoubtsFunction().then(({ data, error }) => {
       if (data) {
         setDoubts(data);
@@ -90,10 +93,12 @@ const Discuss = () => {
           { variant: "error", autoHideDuration: 3000 }
         );
       }
+      setIsLoading(false);
     });
   }, [fetchAllDoubtsFunction, fetchTagsFunction]);
 
   useEffect(() => {
+    // setIsLoading(true);
     setDoubts(
       allDoubts?.filter(({ doubtDetails }) =>
         selectedTags?.every((tag) => doubtDetails?.tags?.includes(tag))
@@ -103,202 +108,224 @@ const Discuss = () => {
     setDoubts((state) =>
       state.filter(
         (doubt) =>
-          doubt?.doubtDetails?.doubtTitle?.toLowerCase()?.includes(searchField?.toLowerCase()) ||
-          doubt?.ownerInfo?.name?.toLowerCase()?.includes(searchField?.toLowerCase())
+          doubt?.doubtDetails?.doubtTitle
+            ?.toLowerCase()
+            ?.includes(searchField?.toLowerCase()) ||
+          doubt?.ownerInfo?.name
+            ?.toLowerCase()
+            ?.includes(searchField?.toLowerCase())
       )
     );
+    // setIsLoading(false);
   }, [selectedTags, allDoubts, searchField]);
 
   return (
     <div className="discuss-outer">
-      <div className="discuss-wrapper">
-        <SnackbarProvider maxSnack={3}></SnackbarProvider>
-        {openPostDialog && <DisplayPostComponent />}
-        <div className="discuss-main-component">
-          <div className="discuss-main-component-wrapper">
-            <div className="filtering-outer">
-              <div className="filtering-wrapper">
-                <div className="filter-buttons">
-                  <Button
-                    onClick={() => {
-                      setDoubts((state) =>
-                        state?.sort(
-                          (a, b) =>
-                            Date.parse(b?.doubtDetails?.createdAt) -
-                            Date.parse(a?.doubtDetails?.createdAt)
-                        )
-                      );
-                      setCriteria("newest_to_oldest");
-                    }}
-                    className={`custom_filter_btn ${
-                      criteria === "newest_to_oldest"
-                        ? "custom_filter_btn_active"
-                        : ""
-                    }`}
-                  >
-                    Newest to Oldest
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      setDoubts((state) =>
-                        state?.sort(
-                          (a, b) =>
-                            b?.doubtDetails?.upVotes?.length -
-                            a?.doubtDetails?.upVotes?.length
-                        )
-                      );
-                      setCriteria("most_votes");
-                    }}
-                    startIcon={<WhatshotRoundedIcon />}
-                    className={`custom_filter_btn ${
-                      criteria === "most_votes"
-                        ? "custom_filter_btn_active"
-                        : ""
-                    }`}
-                  >
-                    Most Votes
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      setCriteria("new_post");
-                      setOpenPostDialog(true);
-                    }}
-                    className={`custom_filter_btn ${
-                      criteria === "new_post" ? "custom_filter_btn_active" : ""
-                    }`}
-                    startIcon={<AddRoundedIcon />}
-                  >
-                    New
-                  </Button>
-                </div>
-                <div className="action-buttons">
-                  <div className="search-by-name">
-                    <Search className="search-div">
-                      <StyledInputBase
-                        placeholder="Search by name…"
-                        inputProps={{ "aria-label": "search" }}
-                        value={searchField}
-                        onChange={(e) => setSearchField(e.target.value)}
-                      />
-                      <IconButton onClick={() => setSearchField("")}>
-                        <CloseRounded />
-                      </IconButton>
-                    </Search>
+      {loading ? (
+        <CircularProgress
+          style={{
+            width: 40,
+            height: 40,
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            color: "#1772cd",
+          }}
+        />
+      ) : (
+        <div className="discuss-wrapper">
+          <SnackbarProvider maxSnack={3}></SnackbarProvider>
+          {openPostDialog && <DisplayPostComponent />}
+          <div className="discuss-main-component">
+            <div className="discuss-main-component-wrapper">
+              <div className="filtering-outer">
+                <div className="filtering-wrapper">
+                  <div className="filter-buttons">
+                    <Button
+                      onClick={() => {
+                        setDoubts((state) =>
+                          state?.sort(
+                            (a, b) =>
+                              Date.parse(b?.doubtDetails?.createdAt) -
+                              Date.parse(a?.doubtDetails?.createdAt)
+                          )
+                        );
+                        setCriteria("newest_to_oldest");
+                      }}
+                      className={`custom_filter_btn ${
+                        criteria === "newest_to_oldest"
+                          ? "custom_filter_btn_active"
+                          : ""
+                      }`}
+                    >
+                      Newest to Oldest
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setDoubts((state) =>
+                          state?.sort(
+                            (a, b) =>
+                              b?.doubtDetails?.upVotes?.length -
+                              a?.doubtDetails?.upVotes?.length
+                          )
+                        );
+                        setCriteria("most_votes");
+                      }}
+                      startIcon={<WhatshotRoundedIcon />}
+                      className={`custom_filter_btn ${
+                        criteria === "most_votes"
+                          ? "custom_filter_btn_active"
+                          : ""
+                      }`}
+                    >
+                      Most Votes
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setCriteria("new_post");
+                        setOpenPostDialog(true);
+                      }}
+                      className={`custom_filter_btn ${
+                        criteria === "new_post"
+                          ? "custom_filter_btn_active"
+                          : ""
+                      }`}
+                      startIcon={<AddRoundedIcon />}
+                    >
+                      New
+                    </Button>
                   </div>
-                  <div className="add-newpost-outer">
-                    <div className="add-newpost-wrapper"></div>
+                  <div className="action-buttons">
+                    <div className="search-by-name">
+                      <Search className="search-div">
+                        <StyledInputBase
+                          placeholder="Search by name…"
+                          inputProps={{ "aria-label": "search" }}
+                          value={searchField}
+                          onChange={(e) => setSearchField(e.target.value)}
+                        />
+                        <IconButton onClick={() => setSearchField("")}>
+                          <CloseRounded />
+                        </IconButton>
+                      </Search>
+                    </div>
+                    <div className="add-newpost-outer">
+                      <div className="add-newpost-wrapper"></div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="doubts-outer">
-              <div className="doubts-wrapper">
-                {doubts?.map(({ doubtDetails, ownerInfo }, idx) => (
-                  <div key={idx} className="doubt-preview-outer">
-                    <div className="doubt-preview-wrapper">
-                      <div className="dynamic-info">
-                        <div className="owner-profile">
-                          <Avatar
-                            style={{ width: 63, height: 63 }}
-                            src={ownerInfo?.photo}
-                          />
-                        </div>
-                        <div className="doubt-info">
-                          <div className="doubt-title-and-tags-info">
-                            <div
-                              onClick={() =>
-                                navigate(`/CodeStudy/doubt?id=${doubtDetails._id}`)
-                              }
-                              className="doubt-title"
-                            >
-                              {doubtDetails?.doubtTitle
-                                ?.split(" ")
-                                ?.map((word, idx) => {
-                                  if (idx < 3) return word + " ";
-                                  else if (idx === 3) return word + "...";
-                                  return "";
-                                })}
-                            </div>
-                            <InputLabel
-                              className="doubts-tags"
-                              style={{ width: "250px", overflowX: "hidden" }}
-                            >
-                              {doubtDetails?.tags?.map((tag, idx) => (
-                                <Chip
-                                  key={idx}
-                                  onClick={() => {
-                                    if (selectedTags.indexOf(tag) === -1)
-                                      setSelectedTags((state) => [
-                                        ...state,
-                                        tag,
-                                      ]);
-                                    else
-                                      setSelectedTags((state) =>
-                                        state.filter((all) => all !== tag)
-                                      );
-                                  }}
-                                  className={`home-post-tags ${
-                                    selectedTags.indexOf(tag) !== -1
-                                      ? "active"
-                                      : ""
-                                  }`}
-                                  label={tag}
-                                />
-                              ))}
-                            </InputLabel>
+              <div className="doubts-outer">
+                <div className="doubts-wrapper">
+                  {doubts?.map(({ doubtDetails, ownerInfo }, idx) => (
+                    <div key={idx} className="doubt-preview-outer">
+                      <div className="doubt-preview-wrapper">
+                        <div className="dynamic-info">
+                          <div className="owner-profile">
+                            <Avatar
+                              style={{ width: 63, height: 63 }}
+                              src={ownerInfo?.photo}
+                            />
                           </div>
                           <div className="doubt-info">
-                            <div className="user-info">
-                              {`${ownerInfo?.name} created at ${new Date(
-                                doubtDetails?.createdAt
-                              ).toLocaleDateString()} | ${new Date(
-                                doubtDetails?.createdAt
-                              ).getHours()}:${new Date(
-                                doubtDetails?.createdAt
-                              ).getMinutes()}`}
+                            <div className="doubt-title-and-tags-info">
+                              <div
+                                onClick={() =>
+                                  navigate(
+                                    `/CodeStudy/doubt?id=${doubtDetails._id}`
+                                  )
+                                }
+                                className="doubt-title"
+                              >
+                                {doubtDetails?.doubtTitle
+                                  ?.split(" ")
+                                  ?.map((word, idx) => {
+                                    if (idx < 3) return word + " ";
+                                    else if (idx === 3) return word + "...";
+                                    return "";
+                                  })}
+                              </div>
+                              <InputLabel
+                                className="doubts-tags"
+                                style={{ width: "250px", overflowX: "hidden" }}
+                              >
+                                {doubtDetails?.tags?.map((tag, idx) => (
+                                  <Chip
+                                    key={idx}
+                                    onClick={() => {
+                                      if (selectedTags.indexOf(tag) === -1)
+                                        setSelectedTags((state) => [
+                                          ...state,
+                                          tag,
+                                        ]);
+                                      else
+                                        setSelectedTags((state) =>
+                                          state.filter((all) => all !== tag)
+                                        );
+                                    }}
+                                    className={`home-post-tags ${
+                                      selectedTags.indexOf(tag) !== -1
+                                        ? "active"
+                                        : ""
+                                    }`}
+                                    label={tag}
+                                  />
+                                ))}
+                              </InputLabel>
+                            </div>
+                            <div className="doubt-info">
+                              <div className="user-info">
+                                {`${ownerInfo?.name} created at ${new Date(
+                                  doubtDetails?.createdAt
+                                ).toLocaleDateString()} | ${new Date(
+                                  doubtDetails?.createdAt
+                                ).getHours()}:${new Date(
+                                  doubtDetails?.createdAt
+                                ).getMinutes()}`}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="static-info">
-                        <div className="info-outer">
-                          <VisibilityRounded />
-                          {doubtDetails?.views}
-                        </div>
-                        <div className="info-outer">
-                          <ArrowDropUpSharpIcon />
-                          {doubtDetails?.upVotes?.length}
+                        <div className="static-info">
+                          <div className="info-outer">
+                            <VisibilityRounded />
+                            {doubtDetails?.views}
+                          </div>
+                          <div className="info-outer">
+                            <ArrowDropUpSharpIcon />
+                            {doubtDetails?.upVotes?.length}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="doubts-tags-outer">
+              <div className="doubts-tags-wrapper">
+                {tags?.map((tag) => (
+                  <Chip
+                    onClick={() => {
+                      if (selectedTags.indexOf(tag) === -1)
+                        setSelectedTags((state) => [...state, tag]);
+                      else
+                        setSelectedTags((state) =>
+                          state.filter((all) => all !== tag)
+                        );
+                    }}
+                    className={`home-post-tags ${
+                      selectedTags.indexOf(tag) !== -1 ? "active" : ""
+                    }`}
+                    key={tag}
+                    label={tag}
+                  />
                 ))}
               </div>
             </div>
           </div>
-          <div className="doubts-tags-outer">
-            <div className="doubts-tags-wrapper">
-              {tags?.map((tag) => (
-                <Chip
-                  onClick={() => {
-                    if (selectedTags.indexOf(tag) === -1)
-                      setSelectedTags((state) => [...state, tag]);
-                    else
-                      setSelectedTags((state) =>
-                        state.filter((all) => all !== tag)
-                      );
-                  }}
-                  className={`home-post-tags ${
-                    selectedTags.indexOf(tag) !== -1 ? "active" : ""
-                  }`}
-                  key={tag}
-                  label={tag}
-                />
-              ))}
-            </div>
-          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
