@@ -53,6 +53,18 @@
     overflow-y: scroll;
 }
 
+.tags-menu-insider{
+    width: 720px !important;
+    flex-wrap: wrap !important;
+    display: flex !important;
+    flex-direction: row !important;
+    margin: .67rem .97rem !important;
+}
+
+.tags-menu-outer{
+    width: 760px !important;
+}
+
 .search-by-tags-wrapper::-webkit-scrollbar{
     display: flex !important;
     width: 5px !important;

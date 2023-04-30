@@ -10,6 +10,7 @@ import {
   FormControl,
   IconButton,
   InputLabel,
+  Menu,
   MenuItem,
   Select,
   Snackbar,
@@ -110,6 +111,15 @@ const DisplayFavourites = () => {
   const [fullDescriptionPost, setFullDescriptionPost] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl((state) => !state);
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -269,7 +279,53 @@ const DisplayFavourites = () => {
                   </IconButton>
                 </Search>
               </div>
-              <div className="search-by-tags-outer">
+
+              <div>
+                <Button
+                  className="custom-button"
+                  id="basic-button"
+                  aria-controls={open ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                >
+                  Filter by Tags
+                </Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                  className="tags-menu-outer"
+                >
+                  <div className="tags-menu-insider">
+                    {tags?.map((tag, idx) => (
+                      <div
+                        className={`tag-representation ${
+                          selectedTags.indexOf(tag) !== -1
+                            ? "selected-tag-representation"
+                            : ""
+                        } home_tags`}
+                        onClick={() => {
+                          if (selectedTags.indexOf(tag) === -1)
+                            setSelectedTags((state) => [...state, tag]);
+                          else
+                            setSelectedTags((state) =>
+                              state.filter((all) => all !== tag)
+                            );
+                        }}
+                        key={idx}
+                      >
+                        {tag}
+                      </div>
+                    ))}
+                  </div>
+                </Menu>
+              </div>
+              {/* <div className="search-by-tags-outer">
                 <div className="tags-heading">
                   <div className="tags-title">Filter by tags</div>
                   <BootstrapTooltip placement="right" title="Clear Tags">
@@ -305,7 +361,7 @@ const DisplayFavourites = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
               <div className="search-by-votes">
                 <FormControl fullWidth>
                   <InputLabel id="sort-posts-by-dropdown">Sort By</InputLabel>

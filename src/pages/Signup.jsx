@@ -1,15 +1,26 @@
 import React, { useState } from "react";
-import { Button, Checkbox, TextField, Backdrop, CircularProgress } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  TextField,
+  Backdrop,
+  CircularProgress,
+  InputAdornment,
+  IconButton,
+} from "@mui/material";
 import { Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSignUpUserMutation } from "../services/appApi";
 // import google from "../static/google.png";
 import "../style/Signup.css";
+import { BootstrapTooltip } from "../components/Navbar";
+import { VisibilityOffRounded, VisibilityRounded } from "@mui/icons-material";
 
 const Signup = () => {
   const [inputName, setInputName] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [response, setResponse] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -23,11 +34,13 @@ const Signup = () => {
     e.preventDefault();
 
     if (inputName.length === 0 || inputEmail.length === 0) {
-      setResponse(true); setIsError(true);
+      setResponse(true);
+      setIsError(true);
       setAlertMessage("Field can not be empty!");
       return;
     } else if (inputPassword.length < 8) {
-      setResponse(true); setIsError(true);
+      setResponse(true);
+      setIsError(true);
       setAlertMessage("Password must be length 8");
       return;
     }
@@ -58,11 +71,12 @@ const Signup = () => {
     <div className="signup-outer">
       <Backdrop
         className="backdrop-dialog"
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={response}
         onClick={() => {
           setDisableSubmit(false);
-          setResponse(false); setAlertMessage('');
+          setResponse(false);
+          setAlertMessage("");
         }}
       >
         <Alert
@@ -81,9 +95,7 @@ const Signup = () => {
           {/* <div className="company-title">
             <img id="company-logo" src={google} alt="GoogleLogo" />
           </div> */}
-          <div className="company-title">
-            CodeStudy
-          </div>
+          <div className="company-title">CodeStudy</div>
           <div className="page-title">Create Account</div>
           <div className="signup-form">
             <div className="input-item">
@@ -119,11 +131,31 @@ const Signup = () => {
                 value={inputPassword}
                 onChange={(e) => setInputPassword(e.target.value)}
                 className="custom-input-field"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 variant="outlined"
                 label="Password"
                 margin="dense"
                 id="input-password"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <BootstrapTooltip
+                        placement="top"
+                        title={showPassword ? "Hide" : "Show"}
+                      >
+                        <IconButton
+                          onClick={() => setShowPassword((state) => !state)}
+                        >
+                          {showPassword ? (
+                            <VisibilityOffRounded />
+                          ) : (
+                            <VisibilityRounded />
+                          )}
+                        </IconButton>
+                      </BootstrapTooltip>
+                    </InputAdornment>
+                  ),
+                }}
                 required
               />
             </div>
@@ -135,7 +167,10 @@ const Signup = () => {
             </div>
 
             <div className="button-group">
-              <Button onClick={() => navigate("/CodeStudy/login")} variant="text">
+              <Button
+                onClick={() => navigate("/CodeStudy/login")}
+                variant="text"
+              >
                 Sign in
               </Button>
               <Button
@@ -144,13 +179,11 @@ const Signup = () => {
                 disableElevation
                 disabled={disableSubmit}
               >
-                {
-                  disableSubmit ? (
-                    <CircularProgress style={{ width: "20px", height: "20px" }} />
-                  ) : (
-                    "Create Account"
-                  )
-                }
+                {disableSubmit ? (
+                  <CircularProgress style={{ width: "20px", height: "20px" }} />
+                ) : (
+                  "Create Account"
+                )}
               </Button>
             </div>
           </div>

@@ -4,6 +4,8 @@ import {
   CircularProgress,
   Backdrop,
   Alert,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,10 +14,14 @@ import { useLoginUserMutation } from "../services/appApi";
 // import google from "../static/google.png";
 
 import "../style/Signup.css";
+import { VisibilityOffRounded, VisibilityRounded } from "@mui/icons-material";
+import { BootstrapTooltip } from "../components/Navbar";
 
 const Login = () => {
   const [loginInputIndex, setLoginInputIndex] = useState("");
   const [loginInputPassword, setLoginInputPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const [response, setResponse] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [disableSubmit, setDisableSubmit] = useState(false);
@@ -45,7 +51,7 @@ const Login = () => {
         setDisableSubmit(false);
       } else {
         localStorage.setItem("token", data.token);
-        navigate('/CodeStudy/')
+        navigate(window.location.pathname !== "/CodeStudy/login" ? window.location.href.substring(window.origin.length) : "/CodeStudy");
       }
     });
   };
@@ -78,9 +84,7 @@ const Login = () => {
           {/* <div className="company-title">
             <img id="company-logo" src={google} alt="GoogleLogo" />
           </div> */}
-          <div className="company-title">
-            CodeStudy
-          </div>
+          <div className="company-title">CodeStudy</div>
           <div className="page-title">Sign in</div>
           <div className="signup-form">
             <div className="input-item">
@@ -101,7 +105,7 @@ const Login = () => {
             <div className="input-item">
               <TextField
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={loginInputPassword}
                 onChange={(e) => setLoginInputPassword(e.target.value)}
                 id="login-input-password"
@@ -109,15 +113,39 @@ const Login = () => {
                 required
                 variant="outlined"
                 margin="dense"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <BootstrapTooltip placement="top" title={showPassword ? "Hide" : "Show"}>
+                        <IconButton
+                          onClick={() => setShowPassword((state) => !state)}
+                        >
+                          {showPassword ? (
+                            <VisibilityOffRounded />
+                          ) : (
+                            <VisibilityRounded />
+                          )}
+                        </IconButton>
+                      </BootstrapTooltip>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
 
             <div className="forgot-password-outer">
-              <Button onClick={() => navigate("/CodeStudy/forgot?index=password")}>Forgot password?</Button>
+              <Button
+                onClick={() => navigate("/CodeStudy/forgot?index=password")}
+              >
+                Forgot password?
+              </Button>
             </div>
 
             <div className="button-group">
-              <Button onClick={() => navigate("/CodeStudy/signup")} variant="text">
+              <Button
+                onClick={() => navigate("/CodeStudy/signup")}
+                variant="text"
+              >
                 Sign up
               </Button>
               <Button
