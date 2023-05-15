@@ -1,8 +1,9 @@
-import SearchIcon from "@mui/icons-material/Search";
 import React, { useEffect, useState } from "react";
 import {
   useFetchTagsMutation,
   useFetchAllPostsMutation,
+  useAddPostToFavouritesMutation,
+  useAddVoteMutation,
 } from "../services/appApi";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
@@ -44,10 +45,6 @@ import { useSelector } from "react-redux";
 
 import "../style/HomePage.css";
 
-import {
-  useAddPostToFavouritesMutation,
-  useAddVoteMutation,
-} from "../services/appApi";
 import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
@@ -56,23 +53,14 @@ const Search = styled("div")(({ theme }) => ({
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
     // backgroundColor: alpha(theme.palette.common.white, 0.25),
-    backgroundColor: "whitesmoke",
+    // backgroundColor: "#1773cf23",
   },
   marginLeft: 0,
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
     width: "auto",
   },
-  background: "whitesmoke",
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
+  // background: "#1773cf23",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -262,11 +250,72 @@ const HomePage = () => {
           <div className="home-page-wrapper">
             <div className="search-outer">
               <div className="search-wrapper">
-                <div className="search-by-name">
+                <div className="home-action-buttons">
+                  <div className="search-by-votes">
+                    <FormControl variant="standard" size="small" fullWidth>
+                      <Select
+                        labelId="sort-posts-by-dropdown"
+                        fullWidth
+                        className="custom_dropdown"
+                        label="Sort by"
+                        value={sortCriteria}
+                        onChange={(e) => setSortCriteria(e.target.value)}
+                      >
+                        <MenuItem value="most_recent">Most Recent</MenuItem>
+                        <MenuItem value="most_votes">Most Votes</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </div>
+                  <div>
+                    <Button
+                      className="custom-button"
+                      id="basic-button"
+                      aria-controls={open ? "basic-menu" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? "true" : undefined}
+                      onClick={handleClick}
+                    >
+                      Filter by Tags
+                    </Button>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      MenuListProps={{
+                        "aria-labelledby": "basic-button",
+                      }}
+                      className="tags-menu-outer"
+                    >
+                      <div className="tags-menu-insider">
+                        {tags?.map((tag, idx) => (
+                          <div
+                            className={`tag-representation ${
+                              selectedTags.indexOf(tag) !== -1
+                                ? "selected-tag-representation"
+                                : ""
+                            } home_tags`}
+                            onClick={() => {
+                              if (selectedTags.indexOf(tag) === -1)
+                                setSelectedTags((state) => [...state, tag]);
+                              else
+                                setSelectedTags((state) =>
+                                  state.filter((all) => all !== tag)
+                                );
+                            }}
+                            key={idx}
+                          >
+                            {tag}
+                          </div>
+                        ))}
+                      </div>
+                    </Menu>
+                  </div>
+                  <div className="add-newpost-outer">
+                    <div className="add-newpost-wrapper"></div>
+                  </div>
+                <div>
                   <Search className="search-div">
-                    <SearchIconWrapper>
-                      <SearchIcon />
-                    </SearchIconWrapper>
                     <StyledInputBase
                       placeholder="Search by name…"
                       inputProps={{ "aria-label": "search" }}
@@ -278,106 +327,9 @@ const HomePage = () => {
                     </IconButton>
                   </Search>
                 </div>
-
-                <div>
-                  <Button
-                    className="custom-button"
-                    id="basic-button"
-                    aria-controls={open ? "basic-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                    onClick={handleClick}
-                  >
-                    Filter by Tags
-                  </Button>
-                  <Menu
-                    id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    MenuListProps={{
-                      "aria-labelledby": "basic-button",
-                    }}
-                    className="tags-menu-outer"
-                  >
-                    <div className="tags-menu-insider">
-                      {tags?.map((tag, idx) => (
-                        <div
-                          className={`tag-representation ${
-                            selectedTags.indexOf(tag) !== -1
-                              ? "selected-tag-representation"
-                              : ""
-                          } home_tags`}
-                          onClick={() => {
-                            if (selectedTags.indexOf(tag) === -1)
-                              setSelectedTags((state) => [...state, tag]);
-                            else
-                              setSelectedTags((state) =>
-                                state.filter((all) => all !== tag)
-                              );
-                          }}
-                          key={idx}
-                        >
-                          {tag}
-                        </div>
-                      ))}
-                    </div>
-                  </Menu>
-                </div>
-                {/* <div className="search-by-tags-outer">
-                  <div className="tags-heading">
-                    <div className="tags-title">Filter by tags</div>
-                    <BootstrapTooltip placement="right" title="Clear Tags">
-                      <CloseRoundedIcon
-                        style={{
-                          visibility:
-                            selectedTags.length > 0 ? "visible" : "hidden",
-                        }}
-                        onClick={() => setSelectedTags([])}
-                        className="clear-icon-tags"
-                      />
-                    </BootstrapTooltip>
-                  </div>
-                  <div className="search-by-tags-wrapper">
-                    {tags?.map((tag, idx) => (
-                      <div
-                        className={`tag-representation ${
-                          selectedTags.indexOf(tag) !== -1
-                            ? "selected-tag-representation"
-                            : ""
-                        } home_tags`}
-                        onClick={() => {
-                          if (selectedTags.indexOf(tag) === -1)
-                            setSelectedTags((state) => [...state, tag]);
-                          else
-                            setSelectedTags((state) =>
-                              state.filter((all) => all !== tag)
-                            );
-                        }}
-                        key={idx}
-                      >
-                        {tag}
-                      </div>
-                    ))}
-                  </div>
-                </div> */}
-                <div className="search-by-votes">
-                  <FormControl fullWidth>
-                    <InputLabel id="sort-posts-by-dropdown">Sort By</InputLabel>
-                    <Select
-                      labelId="sort-posts-by-dropdown"
-                      fullWidth
-                      className="custom_dropdown"
-                      label="Sort by"
-                      value={sortCriteria}
-                      onChange={(e) => setSortCriteria(e.target.value)}
-                    >
-                      <MenuItem value="most_recent">Most Recent</MenuItem>
-                      <MenuItem value="most_votes">Most Votes</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
               </div>
+                </div>
+
             </div>
             <div className="post-outer">
               <div className="post-wrapper">

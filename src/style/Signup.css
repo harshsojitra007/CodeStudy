@@ -3,7 +3,8 @@
     /* height: calc(100vh - 60px) !important; */
     justify-content: center;
     align-items: center;
-    margin-top: 7% !important;
+    margin: 1.77rem !important;
+    margin-top: 100px !important;
 }
 
 .signup-wrapper{
