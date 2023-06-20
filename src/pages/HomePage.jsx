@@ -51,16 +51,11 @@ const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    // backgroundColor: alpha(theme.palette.common.white, 0.25),
-    // backgroundColor: "#1773cf23",
-  },
   marginLeft: 0,
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
     width: "auto",
   },
-  // background: "#1773cf23",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -314,22 +309,21 @@ const HomePage = () => {
                   <div className="add-newpost-outer">
                     <div className="add-newpost-wrapper"></div>
                   </div>
-                <div>
-                  <Search className="search-div">
-                    <StyledInputBase
-                      placeholder="Search by name…"
-                      inputProps={{ "aria-label": "search" }}
-                      value={searchField}
-                      onChange={(e) => setSearchField(e.target.value)}
-                    />
-                    <IconButton onClick={() => setSearchField("")}>
-                      <CloseRounded />
-                    </IconButton>
-                  </Search>
+                  <div>
+                    <Search className="search-div">
+                      <StyledInputBase
+                        placeholder="Search by name…"
+                        inputProps={{ "aria-label": "search" }}
+                        value={searchField}
+                        onChange={(e) => setSearchField(e.target.value)}
+                      />
+                      <IconButton onClick={() => setSearchField("")}>
+                        <CloseRounded />
+                      </IconButton>
+                    </Search>
+                  </div>
                 </div>
               </div>
-                </div>
-
             </div>
             <div className="post-outer">
               <div className="post-wrapper">

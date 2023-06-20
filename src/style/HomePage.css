@@ -5,7 +5,7 @@
     position: relative;
     margin-top: 80px !important;
     width: 100% !important;
-    /* min-width: 640px !important; */
+    min-width: 480px !important;
 }
 
 .home-page-wrapper{

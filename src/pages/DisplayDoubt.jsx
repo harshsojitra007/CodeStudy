@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Backdrop,
   Button,
   Chip,
   CircularProgress,
@@ -37,6 +38,12 @@ import { DeleteRounded, EditRounded, ReplyRounded } from "@mui/icons-material";
 import DisplayPostComponent from "../components/DisplayPostComponent";
 import { AppContext } from "../context/AppContext";
 
+import {
+  CloseRounded,
+  ImageRounded,
+  PictureAsPdfRounded,
+} from "@mui/icons-material";
+
 const DisplayDoubt = () => {
   const user = useSelector((state) => state?.user?.data);
   const userToken = useSelector((state) => state?.user?.token);
@@ -50,6 +57,9 @@ const DisplayDoubt = () => {
 
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  const [previewFile, setPreviewFile] = useState(null);
+  const [openPreview, setOpenPreview] = useState(false);
 
   const [fetchSingleDoubtFunction] = useFetchSingleDoubtMutation();
   const [addVoteToDoubtFunction] = useAddVoteToDoubtMutation();
@@ -115,6 +125,36 @@ const DisplayDoubt = () => {
           )}
           {!!requestedDoubt && (
             <div className="display_doubt_wrapper">
+              <Backdrop
+                className="backdrop-dialog"
+                sx={{
+                  color: "#fff",
+                  zIndex: (theme) => theme.zIndex.drawer + 999,
+                }}
+                open={openPreview}
+                onClick={() => setOpenPreview(false)}
+              >
+                {previewFile !== null ? (
+                  <>
+                    <BootstrapTooltip title="Close Preview" position="bottom">
+                      <CloseRounded
+                        onClick={() => setOpenPreview(false)}
+                        className="close-preview-icon"
+                      />
+                    </BootstrapTooltip>
+                    <object
+                      aria-labelledby="Previewing Document..."
+                      onClick={() => setOpenPreview(false)}
+                      width={"100%"}
+                      height="100%"
+                      data={previewFile?.url}
+                      type={previewFile?.type}
+                    />
+                  </>
+                ) : (
+                  ""
+                )}
+              </Backdrop>
               <div className="section_i_outer">
                 <div className="section_i_wrapper">
                   <div className="left_hand_side">
@@ -388,6 +428,44 @@ const DisplayDoubt = () => {
                               className={`home-post-tags active`}
                             />
                           ))}
+                        </div>
+                      </div>
+
+                      <div className="attached-file-outer">
+                        <div className="attached-file-wrapper">
+                          {requestedDoubt?.doubtData?.media?.map(
+                            (file, idx) => (
+                              <div className="attached-file-viewer" key={idx}>
+                                <div className="attached-file-type-viewer">
+                                  {file?.type?.substr(
+                                    file?.type?.length - 3,
+                                    3
+                                  ) === "pdf" ? (
+                                    <PictureAsPdfRounded
+                                      onClick={() => {
+                                        setPreviewFile(file);
+                                        setOpenPreview(true);
+                                      }}
+                                      className="post-previewing-icon"
+                                    />
+                                  ) : (
+                                    <ImageRounded
+                                      onClick={() => {
+                                        setPreviewFile(file);
+                                        setOpenPreview(true);
+                                      }}
+                                      className="post-previewing-icon"
+                                    />
+                                  )}
+                                </div>
+                                <div className="post-action-outer">
+                                  <div className="attached-file-name-viewer">
+                                    {file?.name}
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          )}
                         </div>
                       </div>
                     </div>
