@@ -1,70 +1,76 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Notes Sharing and Doubt Solving Platform
 
-## Available Scripts
+Welcome to the Notes Sharing and Discussion Forum project! This is a web-based platform that provides users with the ability to share and discuss notes, as well as engage in conversations with fellow users. This project includes user account management functionalities, such as user registration, login, and password recovery, along with features like post creation, upvoting and downvoting mechanisms, discussion threads, and search functionality.
 
-In the project directory, you can run:
+The project is developed using MERN Stack and is designed to be user-friendly, intuitive, and efficient. This project is aimed at improving user experience and making it easy for users to share and discuss notes in a secure and reliable manner.
 
-### `npm start`
+We hope that this project will be useful for individuals and groups who are interested in collaborating and sharing knowledge on various topics. Please feel free to explore the code and contribute to the project by submitting pull requests or issues. Thank you for your interest in our project!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## SRS Document
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[Document](https://docs.google.com/document/d/1JNK1l1UVuzRfeEsbTi0GyLNAc9kq2Gm5/edit?usp=sharing&ouid=103229390666509090327&rtpof=true&sd=true)
 
-### `npm test`
+## Demo
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Video Link : https://www.youtube.com/watch?v=hrPbWc7mh8o
 
-### `npm run build`
+Website Link : https://harshsojitra007.github.io/CodeStudy/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation Guide
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* [Project-Installation-Guide](#project-installation-guide)
+# Project-Installation-Guide
+- Create a `.env` file at `server/`
+- Add the following details correctly,
+```
+PORT=portNumber
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+DB_PASS=YourMongodbDatabasePassword
+DB_USER=YourMongodbDatabaseUsername
 
-### `npm run eject`
+EMAIL_NAME=YourEmail
+// The above email will be used to send mail for verification of client and for updates.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+EMAIL_PASS=UniquePasswordGeneratedByGoogleForNodemailer
+// Go to https://myaccount.google.com/
+// There you need to look for Third Party Access Manager
+// Add nodemailer as application and Google will auto-generate a password that you'll use here
+// Note: this is not your original password. This password is used to identify nodemailer and access your account without using your original password.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+DEFAULT_PROFILE_PIC=APublicURLOfPhoto
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+// Set-up an account at cloudinary and fill below details
+CLOUD_NAME=
+CLOUD_API_KEY=
+CLOUD_SECRET_KEY=
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+JWT_SECRET=AnySecretKeyToGenerateJWTTokens
+JWT_EXPIRES_IN=SpecifyTimeInConventionsForExpiryOfTokensGenerated
+```
+### Please note the below 4 points and change it accordingly to correctly run the project.
+- Go to `client/src/App.jsx` and at Line no. 27 change the state value of `cloudName` to the name of your cloud.
+- Go to `client/src/services/appApi.js` and change the value of `baseUrl` at line no. 7 to `http://localhost:5000`. Also note that here `5000` is the `port number` of backend. For running the project correctly you must mention same port number as your backend have.
+- rum `npm i` at both `server/` and `client/` folders.
+- Run `npm start` to start the project in both `server/` and `client/` folder.
 
-## Learn More
+## Features
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1) Note Sharing: Users can create and share notes on various topics.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2) Upvoting and Downvoting: Users can upvote or downvote notes shared by other users.
 
-### Code Splitting
+3) Discussion Threads: Users can start discussion threads on various topics and engage in meaningful conversations with other users.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+4) Search Functionality: Users can search for notes, discussion threads, and other content using a search bar.
 
-### Analyzing the Bundle Size
+5) User Profile: Users have their own profiles where they can view their activity history, their posts, and their comments.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Security: The platform is designed with security in mind to ensure that user data is protected.
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Authors
 
-### Advanced Configuration
+- [@DAKSHAY SOLANKI](https://github.com/DAKSHAY111)
+- [@HARSH SOJITRA](https://github.com/harshsojitra007)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
