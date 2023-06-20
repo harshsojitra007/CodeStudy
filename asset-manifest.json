@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/CodeStudy/static/css/main.e4e6d8bc.css",
-    "main.js": "/CodeStudy/static/js/main.0e04ee5f.js",
+    "main.css": "/CodeStudy/static/css/main.44194551.css",
+    "main.js": "/CodeStudy/static/js/main.150c34df.js",
     "static/js/787.c4e7f8f9.chunk.js": "/CodeStudy/static/js/787.c4e7f8f9.chunk.js",
     "index.html": "/CodeStudy/index.html",
-    "main.e4e6d8bc.css.map": "/CodeStudy/static/css/main.e4e6d8bc.css.map",
-    "main.0e04ee5f.js.map": "/CodeStudy/static/js/main.0e04ee5f.js.map",
+    "main.44194551.css.map": "/CodeStudy/static/css/main.44194551.css.map",
+    "main.150c34df.js.map": "/CodeStudy/static/js/main.150c34df.js.map",
     "787.c4e7f8f9.chunk.js.map": "/CodeStudy/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e4e6d8bc.css",
-    "static/js/main.0e04ee5f.js"
+    "static/css/main.44194551.css",
+    "static/js/main.150c34df.js"
   ]
 }
