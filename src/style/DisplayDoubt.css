@@ -4,13 +4,14 @@
     align-items: center;
     margin-top: 100px !important;
     margin-bottom: 50px !important;
-    width: 100% !important;
+    width: max(100%, max-content) !important;
+    min-width: 680px !important;
 }
 
 .display_doubt_wrapper{
     display: flex;
     flex-direction: column;
-    width: 70% !important;
+    width: 80% !important;
     justify-content: center;
     align-items: center;
     padding: 1.4rem 3rem;
