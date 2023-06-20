@@ -1,0 +1,126 @@
+.signup-outer{
+    display: flex;
+    /* height: calc(100vh - 60px) !important; */
+    justify-content: center;
+    align-items: center;
+    margin: 1.77rem !important;
+    margin-top: 100px !important;
+}
+
+.signup-wrapper{
+    width: 560px;
+    padding: 2rem;
+    border: 1px solid black;
+    border-radius: .5rem;
+    padding: 4rem 5rem;
+}
+
+.login-wrapper{
+    width: 480px;
+    padding: 2rem;
+    border: 1px solid black;
+    border-radius: .5rem;
+    padding: 4rem 5rem;
+}
+
+.flex-center-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.row-gap-2{
+    row-gap: 2rem;
+}
+
+#company-logo{
+    width: 8rem !important;
+    height: 2.7rem !important;
+}
+
+.company-title{
+    display: flex;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: xx-large;
+    color: #1772cd;
+}
+
+.page-title{
+    font-size: xx-large;
+}
+
+/* .signup-outer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+} */
+
+.custom-input-field{
+    width: 20rem !important;
+}
+
+.forgot-password-outer a{
+    text-decoration: none;
+    font-size: smaller;
+    color: #1772cd;
+}
+
+.forgot-password-outer a:hover{
+    text-decoration: underline;
+}
+
+.terms-and-policy{
+    max-width: inherit;
+    margin: .7rem;
+    font-size: medium;
+}
+
+.terms-and-policy a{
+    text-decoration: none;
+    font-size: medium;
+    color: #1772cd;
+}
+
+.terms-and-policy a:hover{
+    text-decoration: underline;
+}
+
+.button-group{
+    margin: 1.3rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.backdrop-dialog{
+    display: flex;
+    width: 100% !important;
+}
+
+.response-dialog{
+    transform: scale(1.3);
+    max-width: 50%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+}
+
+.reset-info-paragraph{
+    display: flex;
+    font-size: medium;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column;
+    text-align: center;
+}
+
+@media screen and (max-width:640px) {
+    .signup-outer{
+        width: 100%;
+        position: relative;
+        left: 15%;
+    }
+
+    .signup-wrapper{
+        width: 100%;
+    }
+}
